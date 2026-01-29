@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2AuthorizationCodeBearer
+
 app = FastAPI()
 
 @app.get("/")
