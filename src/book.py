@@ -1,15 +1,19 @@
 from enum import Enum
-class Book:
+from typing import Optional
 
-    def __init__(self, title, author, isbn):
-      self.title = title
-      self.author = author
-      self.isbn = isbn
-      self.copies = 1
+from sqlmodel import Field, SQLModel
 
 
+class BookStatus(str, Enum):
+    CheckedOut = "CheckedOut"
+    Available = "Available"
+    OnHold = "OnHold"
 
-class BookStatus(Enum):
-    CheckedOut = 1
-    Availible = 2
-    OnHold = 3
+
+class Book(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    title: str
+    author: str
+    isbn: str = Field(unique=True)
+    copies: int = Field(default=1)
+    status: BookStatus = Field(default=BookStatus.Available)
