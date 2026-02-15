@@ -2,11 +2,13 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    db_host: str = "localhost"
+    model_config = {"env_file": ".env"}
+
+    db_host: str
     db_port: int = 5432
-    db_name: str = "library"
-    db_user: str = "library_user"
-    db_password: str = "library_pass"
+    db_name: str
+    db_user: str
+    db_password: str
 
     @property
     def database_url(self) -> str:
