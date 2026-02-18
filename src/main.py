@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from src.database import create_db_and_tables
 
@@ -14,11 +16,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/ping")
+@app.get("/api/ping")
 def pong():
     return {"ping": "pong!"}
+
+
+frontend_build = Path(__file__).parent.parent / "frontend" / "build"
+if frontend_build.exists():
+    app.mount("/", StaticFiles(directory=str(frontend_build), html=True), name="frontend")

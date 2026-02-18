@@ -1,0 +1,32 @@
+:root {
+	--bg: #1a1207;
+	--text: #d4c5a9;
+	--text-muted: #a89a7e;
+	--gold: #c9a84c;
+	--border: #6b5a3e;
+	--font: Georgia, 'Times New Roman', serif;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--font);
+	background-color: var(--bg);
+	color: var(--text);
+	min-height: 100vh;
+}
+
+a {
+	color: var(--gold);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
